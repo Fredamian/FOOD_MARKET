@@ -11,8 +11,11 @@ router.get('/login-client', adminController.getAddProduct);
 // /admin/products => GET
 router.get('/register-client', adminController.getProducts);
 
-// delete user
+//////////////////////////////////////
+// delete client
 router.get('/delete-client', adminController.getProducts);
+//////////////////////////////////////
+
 
 // /admin/add-product => POST
 router.post('/add-product', adminController.postAddProduct);

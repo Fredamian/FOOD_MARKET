@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const controladorCompra = require('../controllers/buy');
+const controladorCompra = require('../controllers/compra');
 
 const router = express.Router();
 
