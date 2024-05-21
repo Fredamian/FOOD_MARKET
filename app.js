@@ -1,22 +1,17 @@
-var express = require('express'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    cons = require('consolidate'),
-    dust = require('dustjs-helpers'),
-    pg = require('pg'),
-    app = express();
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+var app = express();
 
 //conectar a BD
 //var connect = "postgres://macbook_fredy:123@localhost/foodMarket";
 
-
 //MiddleWare 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extende: false}));
 
-app.get('/',function(req,res) {
-    console.log('TEST')
+app.get('/',function(req,res){
+    console.log('TEST');
 });
 
 //Servidor
