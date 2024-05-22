@@ -10,12 +10,7 @@ const Cliente = meusequelize.define('cliente', {
   }, 
   nome: Sequelize.STRING, 
   email: Sequelize.STRING,
-  password: {
-    type: Sequelize.STRING,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
-  }
+  password: Sequelize.STRING
 },
 {
   freezeTableName: true,

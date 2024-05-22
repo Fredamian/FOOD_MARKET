@@ -1,125 +1,43 @@
-const Product = require('../models/product');
+const express = require('express');
+const bodyParser = require('body-parser');
+const clientRoutes = require('../routes/clientes'); 
 
-exports.getAddProduct = (req, res, next) => {
-  res.status(200).json({editing: false})
-};
+const Pessoa = require('../models/cliente');
 
-exports.postAddProduct = (req, res, next) => {
-  const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
-  const description = req.body.description;
-
-  req.user.createProduto({
-    title: title,
-    price: price,
-    imageUrl: imageUrl,
-    description: description,
-  })
-  .then((resultado) => {
-    console.log('Produto criado');
-    res.status(200).json({produto: resultado})
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json({msg: 'erro interno'});
-  })
-
-};
-
-
-exports.getEditProduct = (req, res, next) => {
-  const editMode = req.query.edit;
-  if (!editMode) {
-    return res.status(200).json({editing: false});
-  }
-  const prodId = req.params.productId;
-  Product.findByPk(prodId)
-  .then((product) => {
-    if (!product) {
-      return res.status(200).json({editing: false});
-    }
-    res.status(200).json({editing: true, produto: product});
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(501).json({msg: 'erro internet'})
-  });
-}
-
-exports.postEditProduct = (req, res, next) => {
-  const prodId = req.body.productId;
-  const updatedTitle = req.body.title;
-  const updatedPrice = req.body.price;
-  const updatedImageUrl = req.body.imageUrl;
-  const updatedDesc = req.body.description;
-
-  Product.findByPk(prodId)
-  .then(product => {
-    product.title = updatedTitle;
-    product.price = updatedPrice; 
-    product.description = updatedDesc;
-    product.imageUrl = updatedImageUrl;
-    return product.save();
-  })
-  .then(resultado => {
-    console.log('Produto actualizado');
-    res.status(200).json({produto: resultado})
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(200).json({msg: 'erro interno'})
-  }
-  );
-};
-
-exports.getProducts = (req, res, next) => {
-  Product.findAll()
-  .then((products) => {
-    res.status(200).json({data: products});
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({msg: 'erro interno'})
-  });
-};
-
-exports.postDeleteProduct = (req, res, next) => {
-  const prodId = req.body.productId;
-  Product.findByPk(prodId)
-  .then(product => {
-    return product.destroy();
-  })
-  .then(resultado => {
-    console.log('Produto removido');
-    res.status(200).json({produto: resultado})
-  })
-  .catch( (err) => {
-    console.log(err);
-    res.status(500).json({msg: 'erro interno'})
-   } )
-};
-
+const app = express();
 
 //register new client
-exports.registerNewClient = (req, res, next) => {
+exports.postNewClient = (req, res, next) => {
+  const { id, nome, email, password } = req.body;
 
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
-  // Cria um novo cliente associado ao usuário
+  console.log("la ele")
+
+  // Simulação de criação de cliente no banco de dados
   req.user.createClient({
-    name: name,
-    email: email,
-    password: password
+    id,
+    nome,
+    email,
+    password
   })
   .then((newClient) => {
-    // Resposta de sucesso
     console.log('Cliente registrado');
     res.status(200).json({ client: newClient });
   })
   .catch(err => {
-    // Tratamento de erros
     console.log(err);
     res.status(500).json({ msg: 'Erro interno' });
   });
+};
+
+/////// get clients
+exports.getClients = (req, res, next) => {
+  console.log("Requisitando todos os clientes");
+  Pessoa.findAll()
+    .then(clients => {
+      res.status(200).json({data : clients });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ msg: 'Erro interno' });
+    });
 };
