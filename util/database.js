@@ -12,4 +12,3 @@ const meuSequelize = new Sequelize(
 );
 
 module.exports = meuSequelize;
-

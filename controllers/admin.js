@@ -25,8 +25,8 @@ exports.postAddProduct = (req, res, next) => {
     res.status(500).json({msg: 'erro interno'});
   })
 
- 
 };
+
 
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
@@ -57,7 +57,7 @@ exports.postEditProduct = (req, res, next) => {
   Product.findByPk(prodId)
   .then(product => {
     product.title = updatedTitle;
-    product.price = updatedPrice;
+    product.price = updatedPrice; 
     product.description = updatedDesc;
     product.imageUrl = updatedImageUrl;
     return product.save();
@@ -70,9 +70,7 @@ exports.postEditProduct = (req, res, next) => {
     console.log(err);
     res.status(200).json({msg: 'erro interno'})
   }
-    
   );
-
 };
 
 exports.getProducts = (req, res, next) => {
@@ -99,4 +97,29 @@ exports.postDeleteProduct = (req, res, next) => {
     console.log(err);
     res.status(500).json({msg: 'erro interno'})
    } )
+};
+
+
+//register new client
+exports.registerNewClient = (req, res, next) => {
+
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  // Cria um novo cliente associado ao usuário
+  req.user.createClient({
+    name: name,
+    email: email,
+    password: password
+  })
+  .then((newClient) => {
+    // Resposta de sucesso
+    console.log('Cliente registrado');
+    res.status(200).json({ client: newClient });
+  })
+  .catch(err => {
+    // Tratamento de erros
+    console.log(err);
+    res.status(500).json({ msg: 'Erro interno' });
+  });
 };
