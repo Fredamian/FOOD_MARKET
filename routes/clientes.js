@@ -16,4 +16,5 @@ router.post('/postClients',adminController.postNewClient);
 // requisitar todas os clientes
 router.get('/getClients',adminController.getClients);
 
+
 module.exports = router;

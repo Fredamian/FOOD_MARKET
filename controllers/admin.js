@@ -7,7 +7,7 @@ const Pessoa = require('../models/cliente');
 const app = express();
 
 //register new client
-exports.postNewClient = (req, res, next) => {
+exports.postNewClient =  async (req, res, next) => {
   const { id, nome, email, password } = req.body;
 
   console.log("la ele")
