@@ -10,7 +10,7 @@ const app = express();
 exports.postNewClient =  async (req, res, next) => {
   const { id, nome, email, password } = req.body;
 
-  console.log("la ele")
+  console.log("entry post function")
 
   // Simulação de criação de cliente no banco de dados
   req.user.createClient({
