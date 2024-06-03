@@ -38,20 +38,31 @@
 //     console.log(`Server started on port ${PORT}`);
 // });
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Client } = require('pg');
 const clientRoutes = require('./routes/clientes'); 
-
-
+const sellerRoutes = require('./routes/vendedores'); 
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configurações de conexão com o banco de dados PostgreSQL
+
+//rotas 
+// rotas de clientes
+app.use('/clients', clientRoutes);
+
+// rotas de vendedores
+app.use('/vendedores', sellerRoutes);
+
+// rotas de produtos
+app.use('/products', productRoutes);
+
+
+
+// Configurações de conexão com a BD
 const client = new Client({
   user: 'macbook_fredy',
   host: 'localhost',
@@ -59,13 +70,11 @@ const client = new Client({
   password: '123',
   port: 5432, // Porta padrão do PostgreSQL
 });
-
-// Conexão com o banco de dados
 client.connect()
-  .then(() => console.log('Conectado ao banco de dados'))
-  .catch(err => console.error('Erro ao conectar ao banco de dados', err));
+  .then(() => console.log('Conectado aBD'))
+  .catch(err => console.error('Erro ao conectar a BD', err));
 
-// Adicionando o cliente ao objeto de solicitação (req)
+// add do cliente ao objeto de solicitação (req)
 app.use((req, res, next) => {
   req.db = client; // Passando o cliente para as rotas
   req.user = {
@@ -81,10 +90,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(clientRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Server is up and running!');
+  res.send('Server OK!');
 });
 
 // Iniciando o servidor
@@ -92,8 +100,3 @@ const PORT = process.env.PORT || 4400;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
-
-
-
-
-

@@ -23,3 +23,19 @@ router.get('/orders', controladorCompra.getOrders);
 router.get('/checkout', controladorCompra.getCheckout);
 
 module.exports = router;
+
+
+/*
+const router = express.Router();
+
+router.post('/new', produtoController.postNewProduct);
+router.get('/', produtoController.getProducts);
+router.put('/edit', produtoController.editProduct);
+router.delete('/remove', produtoController.removeProduct);
+
+module.exports = router; 
+
+
+const express = require('express');
+const produtoController = require('../controllers/produtoController');
+*/

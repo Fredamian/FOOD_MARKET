@@ -1,25 +1,11 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const clientRoutes = require('../routes/clientes'); 
-
+// controllers/clienteController.js
 const { Pessoa } = require('../models/cliente');
 
-const { Vendedor } = require('../models/vendedor');
-
-// Registrar new cliente
+// Registrar novo cliente
 exports.postNewClient = async (req, res, next) => {
   const { id, nome, email, password } = req.body;
 
   try {
-    // funcao findOne que consegue procurar dentro de {Pessoa} por email
-    const existingClient = await Pessoa.findOne({ where: { email } });
-
-    if (existingClient) {
-      console.log('Cliente já existe');
-      return res.status(400).json({ msg: 'Cliente já existe' });
-    }
-
-    // Criar novo cliente
     const newClient = await Pessoa.create({ id, nome, email, password });
     console.log('Cliente registrado');
     res.status(200).json({ client: newClient });
@@ -29,7 +15,7 @@ exports.postNewClient = async (req, res, next) => {
   }
 };
 
-// retornar todos os clientes
+// Obter todos os clientes
 exports.getClients = (req, res, next) => {
   Pessoa.findAll()
     .then(clients => {
@@ -41,7 +27,7 @@ exports.getClients = (req, res, next) => {
     });
 };
 
-// Remove cliente
+// Remover cliente
 exports.removeClient = async (req, res, next) => {
   const { clienteID } = req.body;
 
@@ -61,25 +47,28 @@ exports.removeClient = async (req, res, next) => {
   }
 };
 
-// Registrar novo vendedor
-exports.postNewSeller = async (req, res, next) => {
+// controllers/cobradorController.js
+const Cobrador = require('../models/cobrador');
+
+// Registrar novo cobrador
+exports.postNewCollector = async (req, res, next) => {
   const { id, nome, email, password } = req.body;
 
   try {
-    const newSeller = await Vendedor.create({ id, nome, email, password });
-    console.log('Vendedor foi registrado');
-    res.status(200).json({ vendedor: newSeller });
+    const newCollector = await Cobrador.create({ id, nome, email, password });
+    console.log('Cobrador registrado');
+    res.status(200).json({ collector: newCollector });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: 'Erro interno' });
   }
 };
 
-// Obter todos os vendedores
-exports.getSeller = (req, res, next) => {
-  Vendedor.findAll()
-    .then(seller => {
-      res.status(200).json({ data: seller });
+// Obter todos os cobradores
+exports.getCollectors = (req, res, next) => {
+  Cobrador.findAll()
+    .then(collectors => {
+      res.status(200).json({ data: collectors });
     })
     .catch(err => {
       console.log(err);
@@ -88,18 +77,19 @@ exports.getSeller = (req, res, next) => {
 };
 
 // Remover cobrador
-exports.removeSeller = async (req, res, next) => {
-  const { sellerID } = req.body;
+exports.removeCollector = async (req, res, next) => {
+  const { cobradorID } = req.body;
 
   try {
-    const vendedor = await Vendedor.findByPk(sellerID);
+    const cobrador = await Cobrador.findByPk(cobradorID);
 
-    if (!vendedor) {
-      return res.status(404).json({ msg: 'Vendedor não encontrado' });
+    if (!cobrador) {
+      return res.status(404).json({ msg: 'Cobrador não encontrado' });
     }
-    await vendedor.destroy();
-    console.log('Vendedor removido');
-    res.status(200).json({ msg: 'Vendedor removido com sucesso' });
+
+    await cobrador.destroy();
+    console.log('Cobrador removido');
+    res.status(200).json({ msg: 'Cobrador removido com sucesso' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: 'Erro interno' });
