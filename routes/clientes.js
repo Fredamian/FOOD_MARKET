@@ -7,8 +7,8 @@ const router = express.Router();
 
 
 router.post('http://localhost:4400/newClient', adminController.postNewClient);
-router.get('http://localhost:4400/lookClient', adminController.getClients);
-router.delete('http://localhost:4400/removeClient', adminController.removeClient);
+router.get('http://localhost:4400/getClient', adminController.getClients);
+router.post('http://localhost:4400/removeClient', adminController.removeClient);
 
 
 module.exports = router;

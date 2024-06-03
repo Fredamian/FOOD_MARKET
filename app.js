@@ -58,7 +58,7 @@ app.use('/clients', clientRoutes);
 app.use('/vendedores', sellerRoutes);
 
 // rotas de produtos
-app.use('/products', productRoutes);
+//app.use('/products', productRoutes);
 
 
 
@@ -71,7 +71,7 @@ const client = new Client({
   port: 5432, // Porta padrão do PostgreSQL
 });
 client.connect()
-  .then(() => console.log('Conectado aBD'))
+  .then(() => console.log('Conectado a BD'))
   .catch(err => console.error('Erro ao conectar a BD', err));
 
 // add do cliente ao objeto de solicitação (req)

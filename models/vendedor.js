@@ -1,8 +1,7 @@
-// models/cobrador.js
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../util/database'); // ajuste conforme necessário
 
-const Cobrador = sequelize.define('Cobrador', {
+const Vendedor = sequelize.define('Vendedor', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -24,4 +23,4 @@ const Cobrador = sequelize.define('Cobrador', {
   }
 });
 
-module.exports = Cobrador;
+module.exports = Vendedor;
