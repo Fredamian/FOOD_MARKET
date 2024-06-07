@@ -1,12 +1,12 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../util/database'); // ajuste conforme necessário
+const sequelize = require('../util/database');
 
 const Vendedor = sequelize.define('Vendedor', {
   id: {
     type: DataTypes.INTEGER,
-    autoIncrement: true,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   nome: {
     type: DataTypes.STRING,
@@ -21,6 +21,9 @@ const Vendedor = sequelize.define('Vendedor', {
     type: DataTypes.STRING,
     allowNull: false
   }
+}, {
+  tableName: 'vendedores',
+  timestamps: false
 });
 
 module.exports = Vendedor;

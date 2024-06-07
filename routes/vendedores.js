@@ -1,13 +1,9 @@
 const express = require('express');
-
-const adminController = require('../controllers/admin');
-
 const router = express.Router();
-//http://localhost:4400/
+const vendedorController = require('../controllers/admin');
 
-
-//router.post('http://localhost:4400/postNewSeller', adminController.postNewSeller);
-router.get('http://localhost:4400/getSeller', adminController.getSeller);
-//router.post('http://localhost:4400/removeSeller', adminController.removeCollector);
+//router.post('localhost:4400/newSeller', vendedorController.postNewSeller);
+//router.get('localhost:4400/getSeller', vendedorController.getSellers);
+//router.delete('/remove', vendedorController.removeSeller);
 
 module.exports = router;

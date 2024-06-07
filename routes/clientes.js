@@ -1,14 +1,9 @@
 const express = require('express');
-
-const adminController = require('../controllers/admin');
-
 const router = express.Router();
-//http://localhost:4400/
+const clientController = require('../controllers/admin');
 
-
-router.post('http://localhost:4400/newClient', adminController.postNewClient);
-router.get('http://localhost:4400/getClient', adminController.getClients);
-router.post('http://localhost:4400/removeClient', adminController.removeClient);
-
+router.post('/newClient', clientController.postNewClient);
+router.get('/getClient', clientController.getClients);
+router.delete('/removeClient', clientController.removeClient);
 
 module.exports = router;

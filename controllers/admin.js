@@ -1,107 +1,71 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const clientRoutes = require('../routes/clientes'); 
+const { ClientSession } = require('mongodb');
+const Cliente = require('../models/cliente');
 
-const { Pessoa } = require('../models/cliente');
-
-const { Vendedor } = require('../models/vendedor');
-
-// Registrar new cliente
-exports.postNewClient = async (req, res, next) => {
+// Registrar novo cliente
+exports.postNewClient = async (req, res) => {
   const { id, nome, email, password } = req.body;
 
   try {
-    // funcao findOne que consegue procurar dentro de {Pessoa} por email
-    const existingClient = await Pessoa.findOne({ where: { email } });
+    const existingClient = await Cliente.findOne({ where: { email } });
 
     if (existingClient) {
-      console.log('Cliente já existe');
-      return res.status(400).json({ msg: 'Cliente já existe' });
+      return res.status(400).json({ msg: 'Este cliente já existe' });
     }
-
-    // Criar novo cliente
-    const newClient = await Pessoa.create({ id, nome, email, password });
-    console.log('Cliente registrado');
+    const newClient = await Cliente.create({ id, nome, email, password });
     res.status(200).json({ client: newClient });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ msg: 'Erro interno' });
+    console.error(err);
+    res.status(500).json({ msg: 'Erro nas profundezas' });
   }
 };
 
-// retornar todos os clientes
-exports.getClients = (req, res, next) => {
-  Pessoa.findAll()
-    .then(clients => {
-      res.status(200).json({ data: clients });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ msg: 'Erro interno' });
-    });
+// Retornar todos os clientes
+exports.getClients = async (req, res) => {
+  try {
+    const clientes = await Cliente.findAll();
+    res.status(200).json({ clientes: clientes });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Erro nas profundezas' });
+  }
 };
 
-// Remove cliente
-exports.removeClient = async (req, res, next) => {
-  const { clienteID } = req.body;
+// Remover cliente
+exports.removeClient = async (req, res) => {
+  const { id } = req.body;
 
   try {
-    const cliente = await Pessoa.findByPk(clienteID);
-
+    const cliente = await Cliente.findByPk(id);
     if (!cliente) {
       return res.status(404).json({ msg: 'Cliente não encontrado' });
     }
 
     await cliente.destroy();
-    console.log('Cliente removido');
     res.status(200).json({ msg: 'Cliente removido com sucesso' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: 'Erro interno' });
+    res.status(500).json({ msg: 'Erro nas profundezas delete' });
   }
 };
 
-// Registrar novo vendedor
-exports.postNewSeller = async (req, res, next) => {
-  const { id, nome, email, password } = req.body;
 
-  try {
-    const newSeller = await Vendedor.create({ id, nome, email, password });
-    console.log('Vendedor foi registrado');
-    res.status(200).json({ vendedor: newSeller });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ msg: 'Erro interno' });
-  }
-};
 
-// Obter todos os vendedores
-exports.getSeller = (req, res, next) => {
-  Vendedor.findAll()
-    .then(seller => {
-      res.status(200).json({ data: seller });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ msg: 'Erro interno' });
-    });
-};
 
-// Remover cobrador
-exports.removeSeller = async (req, res, next) => {
-  const { sellerID } = req.body;
 
-  try {
-    const vendedor = await Vendedor.findByPk(sellerID);
 
-    if (!vendedor) {
-      return res.status(404).json({ msg: 'Vendedor não encontrado' });
-    }
-    await vendedor.destroy();
-    console.log('Vendedor removido');
-    res.status(200).json({ msg: 'Vendedor removido com sucesso' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: 'Erro interno' });
-  }
-};
+
+
+
+
+// Dear programmer:
+// When I wrote this code, only god and I
+// knew how it worked.
+// Now, only god knows it!
+//
+// Therefore, if you are trying to optimize
+// this routine and it fails (most surely),
+// please increase this counter as a
+// warning for the next person:
+//
+// total hours wasted here = 25hr
+//

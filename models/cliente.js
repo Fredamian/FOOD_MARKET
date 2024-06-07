@@ -18,3 +18,16 @@ const Cliente = meusequelize.define('cliente', {
 });
 
 module.exports = Cliente;
+
+
+
+
+//copiar se no caso precisar inserir Cliente novo
+
+/*
+{ 
+ "nome": "eu",
+ "email": "eu@uta.cv",
+ "password": "securepassword123"
+}
+*/

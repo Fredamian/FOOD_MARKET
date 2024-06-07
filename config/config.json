@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "macbook_fredy",
+    "password": 123,
+    "database": "foodMarket",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "macbook_fredy",
+    "password": 123,
+    "database": "foodMarket",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "macbook_fredy",
+    "password": 123,
+    "database": "foodMarket",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
