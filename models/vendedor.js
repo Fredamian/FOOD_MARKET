@@ -1,12 +1,12 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
-const Vendedor = sequelize.define('Vendedor', {
+const Vendedor = sequelize.define('vendedores', {
   id: {
-    type: DataTypes.INTEGER,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+    primaryKey: true
   },
   nome: {
     type: DataTypes.STRING,
@@ -14,16 +14,16 @@ const Vendedor = sequelize.define('Vendedor', {
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
+    allowNull: false
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false
   }
-}, {
-  tableName: 'vendedores',
-  timestamps: false
-});
+  },
+  {
+  freezeTableName: true,
+  timestamps: false // Desativando a criação automática de createdAt e updatedAt
+  });
 
 module.exports = Vendedor;

@@ -9,13 +9,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Middleware para adicionar a conexão do banco de dados ao objeto de solicitação (req)
+// middleware para adicionar a conexão do banco de dados ao objeto de solicitação (req)
 app.use((req, res, next) => {
   req.db = dbClient;
   next();
 });
 
-// Rotas
 app.use(clientRoutes);
 app.use(sellerRoutes);
 
@@ -24,10 +23,22 @@ app.get('/', (req, res) => {
 });
 
 
-
-
 // iniciando o servidor
 const PORT = process.env.PORT || 4900;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
+
+
+// Dear programmer:
+// When I wrote this code, only god and
+// I knew how it worked.
+// Now, only god knows it!
+//
+// Therefore, if you are trying to optimize
+// this routine and it fails (most surely),
+// please increase this counter as a
+// warning for the next person:
+//
+// total hours wasted here = 25h
+//

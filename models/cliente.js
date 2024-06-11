@@ -23,9 +23,9 @@ module.exports = Cliente;
 
 
 //copiar se no caso precisar inserir Cliente novo
-
 /*
 { 
+  "id"-> é opcional,
  "nome": "eu",
  "email": "eu@uta.cv",
  "password": "securepassword123"

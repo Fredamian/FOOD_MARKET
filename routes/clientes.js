@@ -6,4 +6,29 @@ router.post('/newClient', clientController.postNewClient);
 router.get('/getClient', clientController.getClients);
 router.delete('/removeClient', clientController.removeClient);
 
+// Rota para contar clientes e vendedores
+router.get('/counts', clientController.getCounts);
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
