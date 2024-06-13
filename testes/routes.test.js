@@ -24,7 +24,6 @@ describe('GET /clients', () => {
   });
 });
 
-
 //testar rota /getVendedores           endpoint
 describe('GET /sellers', () => {
   test('deve retornar todos os vendedores', async () => {
@@ -37,3 +36,4 @@ describe('GET /sellers', () => {
     }
   });
 });
+
