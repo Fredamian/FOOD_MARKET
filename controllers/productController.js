@@ -1,21 +1,16 @@
 const Product = require('../models/produto');
 
-exports.getAddProduct = (req, res, next) => {
-  res.status(200).json({editing: false})
-};
-
-
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const imageurl = req.body.imageurl;
   const price = req.body.price;
   const description = req.body.description;
 
-  req.user.createProduto({
+  Product.create({
     title: title,
     price: price,
     imageurl: imageurl,
-    description: description,
+    description: description
   })
   .then((resultado) => {
     console.log('Produto criado');
@@ -23,77 +18,15 @@ exports.postAddProduct = (req, res, next) => {
   })
   .catch(err => {
     console.log(err);
-    res.status(500).json({msg: 'erro interno'});
   })
-};
-
-exports.getEditProduct = (req, res, next) => {
-  const editMode = req.query.edit;
-  if (!editMode) {
-    return res.status(200).json({editing: false});
-  }
-  const prodId = req.params.productId;
-  Product.findByPk(prodId)
-  .then((product) => {
-    if (!product) {
-      return res.status(200).json({editing: false});
-    }
-    res.status(200).json({editing: true, produto: product});
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(501).json({msg: 'erro internet'})
-  });
-}
-
-exports.postEditProduct = (req, res, next) => {
-  const prodId = req.body.productId;
-  const updatedTitle = req.body.title;
-  const updatedPrice = req.body.price;
-  const updatedImageurlimageurl = req.body.imageurl;
-  const updatedDesc = req.body.description;
-
-  Product.findByPk(prodId)
-  .then(product => {
-    product.title = updatedTitle;
-    product.price = updatedPrice;
-    product.description = updatedDesc;
-    product.imageurl = updatedImageurlimageurl;
-    return product.save();
-  })
-  .then(resultado => {
-    console.log('Produto actualizado');
-    res.status(200).json({produto: resultado})
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(200).json({msg: 'erro interno'})
-  }
-  );
 };
 
 exports.getProducts = (req, res, next) => {
   Product.findAll()
   .then((products) => {
-    res.status(200).json({produtos: products});
+    res.status(200).json({data: products});
   }).catch(err => {
     console.log(err);
     res.status(500).json({msg: 'erro interno'})
   });
-};
-
-exports.postDeleteProduct = (req, res, next) => {
-  const prodId = req.body.productId;
-  Product.findByPk(prodId)
-  .then(product => {
-    return product.destroy();
-  })
-  .then(resultado => {
-    console.log('Produto removido');
-    res.status(200).json({produto: resultado})
-  })
-  .catch( (err) => {
-    console.log(err);
-    res.status(500).json({msg: 'erro interno'})
-   } )
 };

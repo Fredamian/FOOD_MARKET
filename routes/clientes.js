@@ -1,10 +1,14 @@
 const express = require('express');
-const authController = require("../controllers/authController"); // Correct path and file extension
-const clientController = require("../controllers/admin.js"); // Assuming this is the correct file
+
+const clientController = require("../controllers/admin"); // Assuming this is the correct file
+
+const { login, registro } = require('../controllers/authController');
 
 const router = express.Router();
 
-//router.post("/login", authController.login);
+router.post('/login', login);
+router.post('/register', registro);
+
 router.post('/newClient', clientController.postNewClient);
 router.get('/getClients', clientController.getClients);
 router.delete('/removeClient', clientController.removeClient);
