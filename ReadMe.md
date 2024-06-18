@@ -79,3 +79,17 @@ route: `/counts`
 method type: `get`
 description: to return a list of all sellers and clients
 
+## Product routes to follow
+
+route: `/getProducts`
+method type: `get`
+description: to return a list of all the products
+
+route: `/newProduct`
+method type: `post`
+description: to create a new product connected to a seller id
+
+## Buy routes to follow
+route: `/products/:productId`
+method type: `get`
+description: it return just an only product for the given id
