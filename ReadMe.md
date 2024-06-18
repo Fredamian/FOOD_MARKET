@@ -7,7 +7,7 @@ I thought about this project, so that it mainly helps people who manage their ho
 
 ## Environment Setup
 
-In the project directory, you can run:
+### In the project directory, you can run:
 
 ### `npm start`
 
