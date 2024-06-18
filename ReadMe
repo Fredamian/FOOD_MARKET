@@ -1,84 +1,32 @@
-#FOOD MARKET 
- 
+# Getting Started with FOOD MARKET APP
 
-Table of Contents
-Introduction
-Features
-Installation
-Usage
-Contributing
-License
-Contact
-Introduction
-Project Name is a powerful and easy-to-use tool for managing and visualizing data. It allows users to quickly process and analyze large datasets with an intuitive interface and a rich set of features.
+## Intro
 
-Features
-Data Processing: Fast and efficient data processing with customizable pipelines.
-Visualization: Generate interactive and static visualizations easily.
-Extensible: Plugin architecture to add new functionalities.
-Cross-Platform: Works on Windows, MacOS, and Linux.
-Installation
-Prerequisites
-Python 3.7 or higher
-Git
-Steps
-Clone the repository:
+I thought about this project, so that it mainly helps people who manage their homes on a daily basis, and want to always have fresh food, or even the most sought after ones, so basically this software is an indirect exchange platform, which allows users buy or sell in the same. This allows for an exhaustive search for any product, and with just two clicks you will know where to find what you want.
 
-bash
-Copiar código
-git clone https://github.com/username/projectname.git
-cd projectname
-Create a virtual environment:
 
-bash
-Copiar código
-python -m venv env
-source env/bin/activate  # On Windows use `env\Scripts\activate`
-Install the dependencies:
+## Available Scripts
 
-bash
-Copiar código
-pip install -r requirements.txt
-Usage
-Basic Example
-Here's a simple example to get you started:
+In the project directory, you can run:
 
-python
-Copiar código
-import projectname
+### `npm start`
 
-# Load your data
-data = projectname.load_data('path/to/your/data.csv')
+Runs the app in the development mode.\
+Open [http://localhost:4900](http://localhost:4900) to view it in your browser.
 
-# Process the data
-processed_data = projectname.process(data)
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-# Visualize the data
-projectname.visualize(processed_data)
-Command Line Interface
-You can also use the command line interface for quick operations:
+### `npm test`
 
-bash
-Copiar código
-python -m projectname process path/to/your/data.csv
-For more details on usage, refer to the documentation.
+Launches the test runner in the interactive watch mode.\
 
-Contributing
-We welcome contributions from the community! Here’s how you can help:
 
-Fork the repository.
-Create a new branch (git checkout -b feature/your-feature-name).
-Make your changes.
-Commit your changes (git commit -am 'Add some feature').
-Push to the branch (git push origin feature/your-feature-name).
-Create a new Pull Request.
-Please read our Contributing Guide for more details.
+### `npm run build`
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Contact
-If you have any questions or feedback, feel free to reach out to us:
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Email: your-email@example.com
-GitHub Issues: https://github.com/username/projectname/issues
